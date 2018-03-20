@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GitHub Advanced
 // @namespace    https://github.com/mdawsondev/github-advanced
-// @version      1.1.0
+// @version      1.2.0
 // @description  Adds various enhancements to GitHub.
 // @author       Matt Dawson | https://mdawsondev.com
 // @icon         https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png
@@ -21,16 +21,6 @@ var inline_src = (<><![CDATA[
 
         const thisURL = window.location.href;
 
-        if (thisURL.includes("/tree/")) {
-            // Add "Download" button to subfolders.
-            const dlFolder = document.createElement("A"),
-                  btnGroup = document.querySelector(".BtnGroup");
-            dlFolder.href = `https://git.io/vbRmK#home?url=${thisURL}`;
-            dlFolder.text = "Download Folder";
-            dlFolder.classList = "btn btn-sm BtnGroup-item";
-            btnGroup.append(dlFolder);
-        }
-
         if (thisURL.includes("/blob/")) {
             // Add "Download" button to individual files.
             const rawBtn = document.querySelector("#raw-url"),
@@ -40,6 +30,23 @@ var inline_src = (<><![CDATA[
             rawBtn.insertAdjacentElement("afterend", dlBtn);
         }
 
+        if (thisURL.includes("/settings")) {
+            // Add repository name to archive and delete fields.
+            const inputFields = document.querySelectorAll(".input-block"),
+                  repoField   = document.querySelector(".js-repo-name"),
+                  repoName    = repoField.value;
+            inputFields.forEach(node => node.value = repoName);
+        }
+
+        if (thisURL.includes("/tree/")) {
+            // Add "Download" button to subfolders.
+            const dlFolder = document.createElement("A"),
+                  btnGroup = document.querySelector(".BtnGroup");
+            dlFolder.href = `https://git.io/vbRmK#home?url=${thisURL}`;
+            dlFolder.text = "Download Folder";
+            dlFolder.classList = "btn btn-sm BtnGroup-item";
+            btnGroup[0].append(dlFolder);
+        }
 
     })();
 
