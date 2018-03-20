@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GitHub Advanced
 // @namespace    https://github.com/mdawsondev/github-advanced
-// @version      1.2.0
+// @version      1.2.1
 // @description  Adds various enhancements to GitHub.
 // @author       Matt Dawson | https://mdawsondev.com
 // @icon         https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png
@@ -45,7 +45,7 @@ var inline_src = (<><![CDATA[
             dlFolder.href = `https://git.io/vbRmK#home?url=${thisURL}`;
             dlFolder.text = "Download Folder";
             dlFolder.classList = "btn btn-sm BtnGroup-item";
-            btnGroup[0].append(dlFolder);
+            btnGroup.append(dlFolder);
         }
 
     })();
